@@ -1,0 +1,23 @@
+{
+  "name": "node-gpio",
+  "version": "0.0.1",
+  "main": "app.js",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.2",
+    "fs": "*",
+    "http": "*",
+    "https": "*",
+    "ip": "^1.1.5",
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-http-bearer": "^1.0.1",
+    "pigpio": "*",
+    "request": "^2.83.0",
+    "sleep": "^5.1.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node app.js"
+  }
+}
