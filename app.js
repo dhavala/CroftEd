@@ -188,8 +188,8 @@ function move_rightward(steps) {
 
 
 function stop() {
-  Lprop.servoWrite(0)
-  Rprop.servoWrite(0)
+  Lprop.servoWrite(500)
+  Rprop.servoWrite(500)
 }
 
 function warmup() {
@@ -197,12 +197,12 @@ function warmup() {
   console.log('Setting the max throttle...');
   Lprop.servoWrite(pwdMax)
   Rprop.servoWrite(pwdMax)
-  sleep.sleep(1)
+  sleep.sleep(2)
 
   console.log('Setting the min throttle...');
   Lprop.servoWrite(pwdMin)
   Rprop.servoWrite(pwdMin)
-  sleep.sleep(1)
+  sleep.sleep(2)
 
 }
 
