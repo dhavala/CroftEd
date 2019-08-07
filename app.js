@@ -43,8 +43,8 @@ var pwdMin=500
 var pwdMax=2000
 
 
-var Lprop =  new Gpio(2,{mode: Gpio.OUTPUT})
-var Rprop =  new Gpio(3,{mode: Gpio.OUTPUT})
+var Lprop =  new Gpio(17,{mode: Gpio.OUTPUT})
+var Rprop =  new Gpio(27,{mode: Gpio.OUTPUT})
 
 warmup()
 
