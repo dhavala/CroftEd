@@ -42,30 +42,41 @@ console.log(myip);
 var pwdMin=500
 var pwdMax=2000
 
+
 var Lprop =  new Gpio(2,{mode: Gpio.OUTPUT})
 var Rprop =  new Gpio(3,{mode: Gpio.OUTPUT})
 
-Lprop.servoWrite(pwdMax)
-Rprop.servoWrite(pwdMax)
-sleep.sleep(1)
+warmup()
 
-Lprop.servoWrite(pwdMin)
-Rprop.servoWrite(pwdMin)
-sleep.sleep(1)
+//console.log('Setting the min throttle...');
+//Lprop.servoWrite(pwdMin)
+//Rprop.servoWrite(pwdMin)
+//sleep.sleep(1)
+
+//console.log('Setting the max throttle...');
+//Lprop.servoWrite(pwdMax)
+//Rprop.servoWrite(pwdMax)
+//sleep.sleep(1)
 
 
 
-// Duration of rotation for each step
-var milliseconds_per_step = 500;
-var currentPos = 1;
+// max duration that the prop can be on
+var max_time = 60000;
+
+
+app.get('/warmup', function (req, res) {
+  res.send('warmup ok');
+  console.log('Warming up the servos ... ');
+  warmup();
+});
+
 
 // move rover N steps forward
 app.get('/forward/:steps', function (req, res) {
 
   var steps = Number(req.params.steps);
-  currentPos = currentPos + steps;
-  res.send(String(currentPos));
-  console.log('Forward ' + steps + ' steps' + '. Final position = ' + currentPos);
+  res.send('forward ok');
+  console.log('Forward ' + steps + ' steps');
   move_forward(steps);
 });
 
@@ -73,9 +84,8 @@ app.get('/forward/:steps', function (req, res) {
 // move rover N steps backward
 app.get('/backward/:steps', function (req, res) {
   var steps = Number(req.params.steps);
-  currentPos = currentPos - steps;
-  res.send(String(currentPos));
-  console.log('Forward ' + steps + ' steps' + '. Final position = ' + currentPos);
+  res.send('backward ok');
+  console.log('Backward ' + steps + ' rpm' );
   move_backward(steps);
 
 });
@@ -84,9 +94,8 @@ app.get('/backward/:steps', function (req, res) {
 // move rover N steps backward
 app.get('/leftward/:steps', function (req, res) {
   var steps = Number(req.params.steps);
-  currentPos = currentPos - steps;
-  res.send(String(currentPos));
-  console.log('Forward ' + steps + ' steps' + '. Final position = ' + currentPos);
+  res.send('leftward ok');
+  console.log('Leftward ' + steps + ' rpm');
   move_leftward(steps);
 
 });
@@ -94,9 +103,8 @@ app.get('/leftward/:steps', function (req, res) {
 // move rover N steps backward
 app.get('/rightward/:steps', function (req, res) {
   var steps = Number(req.params.steps);
-  currentPos = currentPos - steps;
-  res.send(String(currentPos));
-  console.log('Forward ' + steps + ' steps' + '. Final position = ' + currentPos);
+  res.send('rightward ok');
+  console.log('Right ' + steps + ' rpm' );
   move_rightward(steps);
 
 });
@@ -104,16 +112,14 @@ app.get('/rightward/:steps', function (req, res) {
 
 // reset rover state
 app.get('/reset', function (req, res) {
-  currentPos = 1;
-  res.send(String(currentPos));
-  console.log('Reset bot to 1 and stopping');
+  res.send('stopping ok');
+  console.log('Stopping  ...');
   stop()
 });
 
 // reset rover state
 app.get('/stop', function (req, res) {
-  currentPos = 1;
-  res.send(String(currentPos));
+  res.send('stopping ok');
   console.log('Stopping ...');
   stop()
 });
@@ -130,7 +136,7 @@ function move_forward(steps) {
   setTimeout(function () {
     console.log('Stopped moving...');
     stop();
-  }, milliseconds_per_step * steps);
+  }, max_time);
 }
 
 
@@ -146,7 +152,7 @@ function move_backward(steps) {
   setTimeout(function () {
     console.log('Stopped moving...');
     stop();
-  }, milliseconds_per_step * steps);
+  }, max_time);
 }
 
 function move_leftward(steps) {
@@ -161,7 +167,7 @@ function move_leftward(steps) {
   setTimeout(function () {
     console.log('Stopped moving...');
     stop();
-  }, milliseconds_per_step * steps);
+  }, max_time);
 }
 
 function move_rightward(steps) {
@@ -176,7 +182,7 @@ function move_rightward(steps) {
   setTimeout(function () {
     console.log('Stopped moving...');
     stop();
-  }, milliseconds_per_step * steps);
+  }, max_time);
 }
 
 
@@ -184,6 +190,20 @@ function move_rightward(steps) {
 function stop() {
   Lprop.servoWrite(0)
   Rprop.servoWrite(0)
+}
+
+function warmup() {
+  
+  console.log('Setting the max throttle...');
+  Lprop.servoWrite(pwdMax)
+  Rprop.servoWrite(pwdMax)
+  sleep.sleep(1)
+
+  console.log('Setting the min throttle...');
+  Lprop.servoWrite(pwdMin)
+  Rprop.servoWrite(pwdMin)
+  sleep.sleep(1)
+
 }
 
 
