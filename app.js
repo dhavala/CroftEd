@@ -132,8 +132,8 @@ function move_forward(steps) {
   console.log('Started moving forward...');
 
   // start forward movement
-  Lprop.servoWrite(forward_left_speed)
-  Rprop.servoWrite(forward_right_speed)
+  Lprop.servoWrite(400)
+  Rprop.servoWrite(440)
 
   // stop after the number of steps
   setTimeout(function () {
@@ -163,7 +163,7 @@ function move_leftward(steps) {
 
   // start backward movement
     Lprop.servoWrite(0)
-    Rprop.servoWrite(left_speed)
+    Rprop.servoWrite(1050)
 
 
   // stop after the number of steps
@@ -178,7 +178,7 @@ function move_rightward(steps) {
 
 
   // start backward movement
-    Lprop.servoWrite(right_speed)
+    Lprop.servoWrite(1000)
     Rprop.servoWrite(0)
 
 
