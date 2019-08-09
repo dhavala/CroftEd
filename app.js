@@ -132,10 +132,10 @@ function move_forward(steps) {
   console.log('Started moving forward...');
 
   // start forward movement
-  var actual_steps = steps/2
-  var offset_right = parseInt(actual_steps*0.1)
-  Lprop.servoWrite(actual_steps)
-  Rprop.servoWrite(actual_steps+offset_right)
+  var actual_steps = steps/2;
+  var offset_right = parseInt(actual_steps*0.1);
+  Lprop.servoWrite(actual_steps);
+  Rprop.servoWrite(actual_steps+offset_right);
 
   // stop after the number of steps
   setTimeout(function () {
