@@ -10,7 +10,10 @@ var db = require('./db');
 var ip = require('ip');
 
 
-
+var left_speed = 1000
+var right_speed = 1050
+var forward_left = 1000
+var forward_left = 1000
 
 var Gpio   = require('pigpio').Gpio;
 
@@ -130,7 +133,7 @@ function move_forward(steps) {
 
   // start forward movement
   Lprop.servoWrite(steps)
-  Rprop.servoWrite(steps)
+  Rprop.servoWrite(steps+50)
 
   // stop after the number of steps
   setTimeout(function () {
