@@ -9,8 +9,11 @@ var Strategy = require('passport-http-bearer').Strategy;
 var db = require('./db');
 var ip = require('ip');
 
+var left_speed = 1000;
+var right_speed = 1050;
 
-
+var forward_left_speed = 400;
+var forward_right_speed = 440;
 
 var Gpio   = require('pigpio').Gpio;
 
@@ -39,8 +42,8 @@ app.use(require('morgan')('combined'));
 var myip = ip.address() // my ip address
 console.log(myip);
 
-var pwdMin=500
-var pwdMax=2000
+var pwdMin=200
+var pwdMax=1200
 
 
 var Lprop =  new Gpio(17,{mode: Gpio.OUTPUT})
@@ -129,8 +132,8 @@ function move_forward(steps) {
   console.log('Started moving forward...');
 
   // start forward movement
-  Lprop.servoWrite(steps)
-  Rprop.servoWrite(steps)
+  Lprop.servoWrite(forward_left_speed)
+  Rprop.servoWrite(forward_right_speed)
 
   // stop after the number of steps
   setTimeout(function () {
@@ -160,7 +163,7 @@ function move_leftward(steps) {
 
   // start backward movement
     Lprop.servoWrite(0)
-    Rprop.servoWrite(steps)
+    Rprop.servoWrite(left_speed)
 
 
   // stop after the number of steps
@@ -173,8 +176,9 @@ function move_leftward(steps) {
 function move_rightward(steps) {
   console.log('Started moving right...');
 
+
   // start backward movement
-    Lprop.servoWrite(steps)
+    Lprop.servoWrite(right_speed)
     Rprop.servoWrite(0)
 
 
@@ -188,8 +192,8 @@ function move_rightward(steps) {
 
 
 function stop() {
-  Lprop.servoWrite(500)
-  Rprop.servoWrite(500)
+  Lprop.servoWrite(0)
+  Rprop.servoWrite(0)
 }
 
 function warmup() {
