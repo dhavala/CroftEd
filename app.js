@@ -42,7 +42,7 @@ app.use(require('morgan')('combined'));
 var myip = ip.address() // my ip address
 console.log(myip);
 
-var pwdMin=400
+var pwdMin=500
 var pwdMax=1200
 
 
