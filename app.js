@@ -42,7 +42,7 @@ app.use(require('morgan')('combined'));
 var myip = ip.address() // my ip address
 console.log(myip);
 
-var pwdMin=500
+var pwdMin=200
 var pwdMax=2000
 
 
@@ -133,8 +133,9 @@ function move_forward(steps) {
 
   // start forward movement
   var actual_steps = steps/2
+  var offset_right = parseInt(actual_steps*0.1)
   Lprop.servoWrite(actual_steps)
-  Rprop.servoWrite(actual_steps+50)
+  Rprop.servoWrite(actual_steps+)
 
   // stop after the number of steps
   setTimeout(function () {
@@ -192,8 +193,8 @@ function move_rightward(steps) {
 
 
 function stop() {
-  Lprop.servoWrite(500)
-  Rprop.servoWrite(500)
+  Lprop.servoWrite(0)
+  Rprop.servoWrite(0)
 }
 
 function warmup() {
