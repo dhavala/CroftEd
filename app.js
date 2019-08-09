@@ -12,8 +12,8 @@ var ip = require('ip');
 var left_speed = 1000;
 var right_speed = 1050;
 
-var forward_left_speed = 400;
-var forward_right_speed = 440;
+var forward_left_speed = 500;
+var forward_right_speed = 550;
 
 var Gpio   = require('pigpio').Gpio;
 
@@ -42,7 +42,7 @@ app.use(require('morgan')('combined'));
 var myip = ip.address() // my ip address
 console.log(myip);
 
-var pwdMin=200
+var pwdMin=400
 var pwdMax=1200
 
 
@@ -132,8 +132,8 @@ function move_forward(steps) {
   console.log('Started moving forward...');
 
   // start forward movement
-  Lprop.servoWrite(400)
-  Rprop.servoWrite(440)
+  Lprop.servoWrite(500)
+  Rprop.servoWrite(550)
 
   // stop after the number of steps
   setTimeout(function () {
@@ -163,7 +163,7 @@ function move_leftward(steps) {
 
   // start backward movement
     Lprop.servoWrite(0)
-    Rprop.servoWrite(1050)
+    Rprop.servoWrite(1000)
 
 
   // stop after the number of steps
