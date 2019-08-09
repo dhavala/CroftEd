@@ -10,10 +10,6 @@ var db = require('./db');
 var ip = require('ip');
 
 
-var left_speed = 1000
-var right_speed = 1050
-var forward_left = 1000
-var forward_left = 1000
 
 var Gpio   = require('pigpio').Gpio;
 
@@ -43,7 +39,7 @@ var myip = ip.address() // my ip address
 console.log(myip);
 
 var pwdMin=200
-var pwdMax=2000
+var pwdMax=1100
 
 
 var Lprop =  new Gpio(17,{mode: Gpio.OUTPUT})
@@ -132,7 +128,7 @@ function move_forward(steps) {
   console.log('Started moving forward...');
 
   // start forward movement
-  var actual_steps = steps/2;
+  var actual_steps = parseInt(steps/2);
   var offset_right = parseInt(actual_steps*0.1);
   Lprop.servoWrite(actual_steps);
   Rprop.servoWrite(actual_steps+offset_right);
