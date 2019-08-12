@@ -64,7 +64,7 @@ warmup()
 
 
 // max duration that the prop can be on
-var max_time = 60000;
+var max_time =  3000;
 
 
 app.get('/warmup', function (req, res) {
