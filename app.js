@@ -133,7 +133,7 @@ function move_forward(steps) {
 
   // start forward movement
   Lprop.servoWrite(steps)
-  Rprop.servoWrite(steps)
+  Rprop.servoWrite(Number(steps) + 50)
 
   // stop after the number of steps
   setTimeout(function () {
